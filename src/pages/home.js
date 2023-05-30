@@ -14,7 +14,7 @@ const products = [
   {
     id: 2,
     name: 'Basic Tee Savage',
-    url: 'basic-tee-savage',
+    url: 'basic-tee-tay-son',
     imageSrc: '2.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -23,7 +23,7 @@ const products = [
   {
     id: 3,
     name: 'Basic Tee',
-    url: 'basic-tee',
+    url: 'basic-tee-tay-son',
     imageSrc: '3.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -32,7 +32,7 @@ const products = [
   {
     id: 3,
     name: 'Basic Tee Fucking Awesome',
-    url: 'basic-tee-fucking-awesome',
+    url: 'basic-tee-tay-son',
     imageSrc: '4.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -41,6 +41,7 @@ const products = [
   {
     id: 1,
     name: 'Basic Tee',
+    url: 'basic-tee-tay-son',
     imageSrc: '1.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -49,6 +50,7 @@ const products = [
   {
     id: 2,
     name: 'Basic Tee',
+    url: 'basic-tee-tay-son',
     imageSrc: '2.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -57,6 +59,7 @@ const products = [
   {
     id: 3,
     name: 'Basic Tee',
+    url: 'basic-tee-tay-son',
     imageSrc: '3.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
@@ -65,6 +68,7 @@ const products = [
   {
     id: 3,
     name: 'Basic Tee',
+    url: 'basic-tee-tay-son',
     imageSrc: '4.jpg',
     imageAlt: "Front of men's Basic Tee in White.",
     price: '$35',
