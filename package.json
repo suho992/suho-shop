@@ -2,7 +2,7 @@
   "name": "suho",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://suho992.github.com/suho-shop",
+  "homepage": "https://suho992.github.io/suho-shop",
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
