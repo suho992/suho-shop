@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/suho-shop/static/css/main.d8577680.css",
+    "main.js": "/suho-shop/static/js/main.daada451.js",
+    "static/js/787.1e46a9ad.chunk.js": "/suho-shop/static/js/787.1e46a9ad.chunk.js",
+    "index.html": "/suho-shop/index.html",
+    "main.d8577680.css.map": "/suho-shop/static/css/main.d8577680.css.map",
+    "main.daada451.js.map": "/suho-shop/static/js/main.daada451.js.map",
+    "787.1e46a9ad.chunk.js.map": "/suho-shop/static/js/787.1e46a9ad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8577680.css",
+    "static/js/main.daada451.js"
+  ]
+}
