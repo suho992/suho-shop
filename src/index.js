@@ -7,6 +7,8 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Signup from './pages/signup'
 import Product from './pages/product';
+import Sneakers from './pages/sneakers';
+import AddProduct from './admin/addProduct';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,15 @@ const router = createBrowserRouter([
     path: '/signup', element: <Signup/>
   },
   {
+    path: '/sneakers', element: <Sneakers/>
+  },
+  {
     path: '/product/basic-tee-tay-son', element: <Product id="1"/>
+  },
+  {
+    path: '/admin/products/add-product', element: <AddProduct/>
   }
+
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
