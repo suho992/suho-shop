@@ -2,11 +2,16 @@ import { PhotoIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 import { db, getDownloadURL, ref, storage, uploadBytes } from '../firebase_setup/firebase'
 import { addDoc, collection } from "firebase/firestore"
+import Sidebar from './sidebar'
+import Notification from '../components/notification'
+import { useDispatch } from 'react-redux'
+import { openNotification } from '../redux/slice'
 
 
 export default function AddProduct() {
+    const dispatch = useDispatch()
     const [variant, setVariant] = useState([{variant:'', price:0}])
-    const [form, setForm] = useState({category:'sneakers', brand:'Off-White'})
+    const [form, setForm] = useState({category:'sneakers', brand:'Off-White', name:'', description:''})
     const [images, setImages] = useState([])
     const addVarian = e => {
       const xVariant = variant.slice()
@@ -38,7 +43,18 @@ export default function AddProduct() {
       setImages({...images, ...{[e.target.name] : e.target.files[e.target.files.length-1]}})
     }
     const upload = () => {
-      if(images.length < 1) return
+      if(form.name === ''){
+        dispatch(openNotification({title:'Oops...', msg:'It looks like you forgot to enter the product name'}))
+        return 
+      }
+      if(form.description === ''){
+        dispatch(openNotification({title:'Oops...', msg:'It looks like you forgot to enter the Description'}))
+        return 
+      }
+      if(images.length < 4){
+        dispatch(openNotification({title:'Oops...', msg:'It looks like you forgot to enter the Images'}))
+        return 
+      }
       const img1 = ref(storage, `/images/${form.slug+"-image-1"}`)
       uploadBytes(img1, images["image-1"]).then((snapshot) => {
         getDownloadURL(img1).then(url_1 => {
@@ -63,7 +79,8 @@ export default function AddProduct() {
                       data.img = img
                       try{
                         addDoc(collection(db, "products"), data).then(()=>{
-                          console.log('upload success')
+                          dispatch(openNotification({title:'Upload success', msg:'jlaksdjflaksjdf'}))
+                          window.location.reload(); 
                         })
                       }catch (e){
                         console.error("Error adding document: ", e)
@@ -81,7 +98,8 @@ export default function AddProduct() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+      <Sidebar/>
+      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 md:ml-64 sm:py-8 lg:max-w-7xl lg:px-8">
         <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -92,6 +110,7 @@ export default function AddProduct() {
                       <div className="mt-2">
                           <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                           <input
+                              required
                               onChange={onChange}
                               type="text"
                               name="name"
@@ -109,6 +128,7 @@ export default function AddProduct() {
                       </label>
                         <div className="mt-2">
                             <textarea
+                            required
                             onChange={onChange}
                             id="description"
                             name="description"
@@ -241,14 +261,14 @@ export default function AddProduct() {
                             {
                                 variant.map((a, i) => (
                                     <tr key={i} className="border-b dark:border-neutral-500">
-                                        <td className="whitespace-nowrap px-6 py-4 w-1/2">
-                                            <input onChange={onVariantChange} type="text" name={"variant-"+i} placeholder='variant' className="w-full border-0"></input>
+                                        <td className="whitespace-nowrap px-6 py-4 w-1/4 lg:w-1/2">
+                                            <input required onChange={onVariantChange} type="text" name={"variant-"+i} placeholder='variant' className="w-full border-0"></input>
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
-                                            <input onChange={onVariantChange} type="number" name={"stock-"+i} placeholder='0' className="w-full border-0"></input>
+                                            <input required onChange={onVariantChange} type="number" name={"stock-"+i} placeholder='0' className="w-full border-0"></input>
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
-                                            <input onChange={onVariantChange} type="number" name={"price-"+i} placeholder='0' className="w-full border-0"></input>
+                                            <input required onChange={onVariantChange} type="number" name={"price-"+i} placeholder='0' className="w-full border-0"></input>
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
                                             <input onChange={onVariantChange} type="number" name={"disc-"+i} placeholder='0' className="w-full border-0"></input>
@@ -266,9 +286,6 @@ export default function AddProduct() {
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-            Cancel
-            </button>
             <button
             onClick={upload}
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -276,6 +293,7 @@ export default function AddProduct() {
             Save
             </button>
         </div>
+        <Notification/>
     </div>
     </div>
   )
